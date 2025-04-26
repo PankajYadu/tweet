@@ -1,0 +1,53 @@
+<!-- twitter/templates/base.html -->
+{%extends 'layout.html'%}
+{% block content %}
+<div>
+    <!--<h2 class = "text-center text-white mt-4"> home page.</h2>-->
+    <h3 class = "text-center text-white mt-4">Welcome! @{{request.user}} to All Tweets</h3>
+    <button class = "text-center mx-4">
+        <a class="btn btn-primary" href="{% url 'create' %}">Post Tweet</a>
+    </button>
+    <div class="container mt-4">
+        <div class="row g-4">
+            {% for tweet in tweets %}
+                <div class="col-sm-6 col-md-4 col-lg-4 d-flex">
+                    <div class="card w-100">
+                        {% if tweet.photo %}
+                        <!--we used photo in model thats why here photo is used, tweet is a iterator in tweets and tweet is getting_object_or_404-->
+                            <img class="card-img-top" src="{{ tweet.photo.url }}" alt="Tweet image">
+                        {% endif %}
+    
+                        <div class="card-body">
+                            <h5 class="card-title">@{{ tweet.user.username }}</h5>
+                            <p class="card-text">{{ tweet.text }}</p>
+                            <p class="card-text">
+                                <small class="text-muted font-weight-bold">
+                                    {% if tweet.was_edited and request.user == tweet.user %}
+                                    Edited on {{ tweet.updated_at|date:"M d, Y H:i" }}
+                                {% else %}
+                                    Posted on {{ tweet.created_at|date:"M d, Y H:i" }}
+                                {% endif %}
+                                {% if tweet.time_ago %}
+                                    ({{ tweet.time_ago }})
+                                {% endif %}
+                                </small>
+                             
+                            </p>
+                                   <!-- Show edit and delete options only for the logged-in user's tweets -->
+                                   {% if tweet.user == request.user %}
+                                   <a href="{% url 'edit' tweet.id %}" class="btn btn-primary">Edit Tweet</a>
+                                   <a href="{% url 'delete' tweet.id %}" class="btn btn-danger">Delete Tweet</a>
+                               {% endif %}
+                            {% comment %} <a href="{% url 'edit' tweet.id %}" class="btn btn-primary">Edit Tweet</a>
+                            <a href="{% url 'delete' tweet.id %}" class="btn btn-danger">Delete Tweet</a> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+       
+
+</div>
+{% endblock %}

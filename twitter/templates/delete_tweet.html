@@ -1,0 +1,20 @@
+{%extends 'layout.html'%}
+{% block content %}
+<div>
+    <h2 class = "text-center text-white mt-4">This is the home page.</h2>
+    <h3 class = "text-center text-white mt-4">tweet list</h3>
+    <button class = "text-center mx-4">
+        <a class="btn btn-success" href="{% url 'base' %}">All Tweets</a>
+    </button>
+   <h1 class = "text-white mt-4">Are you sure you want to delete ?</h1>
+   <form method = "POST">
+    {% csrf_token %}
+   {{deleatable_form.as_p}}
+    </div>
+    <button type="submit" class="btn btn-danger me-2">Yes, Delete</button>
+    <a class="btn btn-success" href="{% url 'base' %}">Cancel</a>
+   </form>
+       
+
+</div>
+{% endblock %}

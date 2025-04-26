@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <div class="container mt-5">
+    <p class="text-white">Are you sure you want to logout?</p>
+    <form method="POST">
+      {% csrf_token %}
+      {% comment %} <button type="submit" class="btn btn-danger">Logout</button> {% endcomment %}
+      <a href = "{%url 'login'%}"class= "btn btn-warning">Back to Login</a>
+    </form>
+  </div>
+{% endblock %}
