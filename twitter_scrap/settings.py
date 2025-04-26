@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ug7adv2-dr+%%p1k)304rti#ycip1pxfnja5c_pr#6lz6ft=@m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tweety-lhkv.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
